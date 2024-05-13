@@ -28,6 +28,13 @@
                 <input asp-for="Especialidad" class="form-control" />
                 <span asp-validation-for="Especialidad" class="text-danger"></span>
             </div>
+                <div class="form-group">
+                    <label class="control-label">Nombre del Consultorio</label>
+                    <select asp-for="ConsultorioId" class="form-control" asp-items="@ViewBag.ConsultorioId">
+                        <option value="">Selecciona Hospital</option>
+                    </select>
+                    <span asp-validation-for="ConsultorioId" class="text-danger"></span>
+                </div>            
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

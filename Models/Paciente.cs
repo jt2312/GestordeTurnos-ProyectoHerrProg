@@ -10,5 +10,6 @@ namespace HerramientasProgFinal.Models
         public int Id { get; set; }
         public string Nombre { get; set; }
         public int Edad { get; set; }
+        public virtual ICollection<Citacion> Citas { get; set; }
     }
 }
