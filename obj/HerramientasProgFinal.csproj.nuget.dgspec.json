@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {}
+    "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {}
   },
   "projects": {
-    "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {
+    "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
+        "projectUniqueName": "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
         "projectName": "HerramientasProgFinal",
-        "projectPath": "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
+        "projectPath": "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
         "packagesPath": "C:\\Users\\Julian\\.nuget\\packages\\",
-        "outputPath": "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\obj\\",
+        "outputPath": "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Julian\\AppData\\Roaming\\NuGet\\NuGet.Config",

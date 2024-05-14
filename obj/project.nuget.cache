@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "V5sOvlKDmCJnXNX4VUT7oSwETAue8+MFv3z3zPM4ViT8NN9TKp3PtxPEQPNfzCk8MXUoFfwKLfH7Ieh8b/L2FA==",
+  "dgSpecHash": "SDw+IVMuP1YIbTb/O5BUCVeLXpYEzVQ7HInoeueDHAmsyS6O5mgqKZB9AeNelEMwDU0/B32SKgT5VvAlzz1T8Q==",
   "success": true,
-  "projectFilePath": "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
+  "projectFilePath": "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Julian\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\Julian\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
