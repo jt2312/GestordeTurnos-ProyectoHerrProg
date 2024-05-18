@@ -1,0 +1,55 @@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+@inject RoleManager<IdentityRole> RoleManager
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Crear";
+    var request = HttpContextAccessor.HttpContext.Request;
+    var isPost = string.Equals(request.Method, "POST", StringComparison.OrdinalIgnoreCase);
+}
+
+
+
+<h1 class="text-primary">Crear Rol</h1>
+
+<form method="post" class="custom-form">
+    <div class="form-group">
+        <label for="roleName">Nombre del Rol</label>
+        <input type="text" class="form-control" id="roleName" name="roleName" placeholder="Ingrese el nombre del rol" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Crear</button>
+</form>
+
+@{
+    if (isPost)
+    {
+        var roleName = request.Form["roleName"];
+        if (!string.IsNullOrEmpty(roleName))
+        {
+            var roleExists = RoleManager.RoleExistsAsync(roleName).Result;
+            if (!roleExists)
+            {
+                var role = new IdentityRole(roleName);
+                var result = RoleManager.CreateAsync(role).Result;
+                if (result.Succeeded)
+                {
+                    <p class="text-success">Rol creado exitosamente.</p>
+                }
+                else
+                {
+                    <p class="text-danger">Error al crear el rol:</p>
+                    <ul class="text-danger">
+                        @foreach (var error in result.Errors)
+                        {
+                            <li>@error.Description</li>
+                        }
+                    </ul>
+                }
+            }
+            else
+            {
+                <p class="text-warning">El rol ya existe.</p>
+            }
+        }
+    }
+}

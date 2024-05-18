@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using HerramientasProgFinal.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace HerramientasProgFinal.Data
 {
-    public class CitacionContext : DbContext
+    public class CitacionContext : IdentityDbContext
     {
         public CitacionContext (DbContextOptions<CitacionContext> options)
             : base(options)

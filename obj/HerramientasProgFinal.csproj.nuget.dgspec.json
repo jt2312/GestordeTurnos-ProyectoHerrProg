@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {}
+    "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {}
   },
   "projects": {
-    "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {
+    "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
+        "projectUniqueName": "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
         "projectName": "HerramientasProgFinal",
-        "projectPath": "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
+        "projectPath": "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
         "packagesPath": "C:\\Users\\Julian\\.nuget\\packages\\",
-        "outputPath": "f:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\obj\\",
+        "outputPath": "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Julian\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -47,11 +47,11 @@
           "dependencies": {
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[8.0.4, )"
+              "version": "[8.0.5, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",

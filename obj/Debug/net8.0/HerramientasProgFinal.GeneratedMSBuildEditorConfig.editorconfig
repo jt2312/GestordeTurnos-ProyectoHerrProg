@@ -26,6 +26,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = F:\Analisis en sistemas\ISTEA\ProyectiFinalH\HerramientasProgFinal
 build_property._RazorSourceGeneratorDebug = 
 
+[F:/Analisis en sistemas/ISTEA/ProyectiFinalH/HerramientasProgFinal/Areas/_ViewSatart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcX1ZpZXdTYXRhcnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [F:/Analisis en sistemas/ISTEA/ProyectiFinalH/HerramientasProgFinal/Views/Citacion/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2l0YWNpb25cQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -114,12 +118,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[F:/Analisis en sistemas/ISTEA/ProyectiFinalH/HerramientasProgFinal/Views/Roles/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Analisis en sistemas/ISTEA/ProyectiFinalH/HerramientasProgFinal/Views/Roles/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9sZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [F:/Analisis en sistemas/ISTEA/ProyectiFinalH/HerramientasProgFinal/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[F:/Analisis en sistemas/ISTEA/ProyectiFinalH/HerramientasProgFinal/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [F:/Analisis en sistemas/ISTEA/ProyectiFinalH/HerramientasProgFinal/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Analisis en sistemas/ISTEA/ProyectiFinalH/HerramientasProgFinal/Views/Users/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[F:/Analisis en sistemas/ISTEA/ProyectiFinalH/HerramientasProgFinal/Views/Users/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [F:/Analisis en sistemas/ISTEA/ProyectiFinalH/HerramientasProgFinal/Views/_ViewImports.cshtml]

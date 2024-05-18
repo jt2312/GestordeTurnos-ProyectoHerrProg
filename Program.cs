@@ -1,12 +1,27 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity;
 using HerramientasProgFinal.Data;
+using HerramientasProgFinal.Services;
+using HerramientasProgFinal.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CitacionContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("CitacionContext") ?? throw new InvalidOperationException("Connection string 'CitacionContext' not found.")));
+    options.UseSqlite(builder.Configuration.GetConnectionString("CitacionContext") 
+    ?? throw new InvalidOperationException("Connection string 'CitacionContext' not found.")));
 
 // Add services to the container.
+builder.Services.AddDefaultIdentity<IdentityUser>()
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<CitacionContext>();
+
 builder.Services.AddControllersWithViews();
+
+// builder.Services.AddScoped<IConsultorioService, ConsultorioService>();
+// builder.Services.AddScoped<IRolesService, RolesService>();
+// builder.Services.AddScoped<ICitacionService, CitacionService>();
+// builder.Services.AddScoped<IDoctorService, DoctorService>();
+// builder.Services.AddScoped<IPacienteService, PacienteService>();
+
 
 var app = builder.Build();
 
@@ -23,6 +38,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
