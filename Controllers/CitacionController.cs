@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HerramientasProgFinal.Data;
 using HerramientasProgFinal.Models;
+using HerramientasProgFinal.Services;
+using HerramientasProgFinal.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HerramientasProgFinal.Controllers
 {
@@ -14,38 +17,39 @@ namespace HerramientasProgFinal.Controllers
     {
         private readonly CitacionContext _context;
 
-        public CitacionController(CitacionContext context)
+        private ICitacionService _citacionService;
+
+        public CitacionController(ICitacionService citacionService)
         {
-            _context = context;
+            _citacionService = citacionService;
         }
 
         // GET: Citacion
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? filter)
         {
-            return View(await _context.Citacion.ToListAsync());
+            var appointments = _citacionService.GetAll(filter);
+
+            var viewModel = new CitacionViewModel();
+            viewModel.Citaciones = appointments;
+
+            return View(viewModel);
         }
 
         // GET: Citacion/Details/5
+        [Authorize(Roles = "AdminSupremo,SemiAdmin,Noob")]
+
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var citacion = await _context.Citacion
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (citacion == null)
-            {
-                return NotFound();
-            }
-
-            return View(citacion);
+            var cita = await _citacionService.GetById(id);
+            return View(cita);
         }
 
         // GET: Citacion/Create
+        [Authorize(Roles = "AdminSupremo,SemiAdmin,Noob")]
         public IActionResult Create()
         {
+            ViewData["DoctorId"] = new SelectList(_citacionService.getContext().Doctor, "Id", "Nombre");            
+            ViewData["PacienteId"] = new SelectList(_citacionService.getContext().Paciente, "Id", "Nombre");
             return View();
         }
 
@@ -54,30 +58,29 @@ namespace HerramientasProgFinal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descripcion")] Citacion citacion)
+        [Authorize(Roles = "AdminSupremo,SemiAdmin,Noob")]
+        public async Task<IActionResult> Create([Bind("Id,Descripcion,DoctorId,PacienteId")] Citacion citacion)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(citacion);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(citacion);
+            _citacionService.Create(citacion);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Citacion/Edit/5
+        [Authorize(Roles = "AdminSupremo,SemiAdmin,Noob")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _citacionService.getContext().Citacion == null)
             {
                 return NotFound();
             }
 
-            var citacion = await _context.Citacion.FindAsync(id);
+            var citacion = await _citacionService.GetById(id);
             if (citacion == null)
             {
                 return NotFound();
             }
+            ViewData["DoctorId"] = new SelectList(_citacionService.getContext().Doctor, "Id", "Nombre");
+            ViewData["PatientId"] = new SelectList(_citacionService.getContext().Paciente, "Id", "Nombre", citacion.PacienteId);
             return View(citacion);
         }
 
@@ -86,46 +89,30 @@ namespace HerramientasProgFinal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion")] Citacion citacion)
+        [Authorize(Roles = "AdminSupremo,SemiAdmin,Noob")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,DoctorId,PacienteId")] Citacion citacion)
         {
             if (id != citacion.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(citacion);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CitacionExists(citacion.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(citacion);
+            _citacionService.Update(citacion,id);
+            return RedirectToAction(nameof(Index));
+            
         }
 
         // GET: Citacion/Delete/5
+        [Authorize(Roles = "AdminSupremo")] 
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _citacionService.getContext().Citacion == null)
             {
                 return NotFound();
             }
 
-            var citacion = await _context.Citacion
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var citacion = await _citacionService.GetById(id);
+
             if (citacion == null)
             {
                 return NotFound();
@@ -137,21 +124,26 @@ namespace HerramientasProgFinal.Controllers
         // POST: Citacion/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AdminSupremo")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var citacion = await _context.Citacion.FindAsync(id);
-            if (citacion != null)
+            if (_citacionService.getContext().Citacion == null)
             {
-                _context.Citacion.Remove(citacion);
+                return Problem("Entity set 'CitacionContext.Citacion'  is null.");
             }
 
-            await _context.SaveChangesAsync();
+            var citacion = await _citacionService.GetById(id);
+            if (citacion != null)
+            {
+                _citacionService.Delete(citacion);
+            }
+            
             return RedirectToAction(nameof(Index));
         }
 
         private bool CitacionExists(int id)
         {
-            return _context.Citacion.Any(e => e.Id == id);
+            return (_citacionService.getContext().Citacion?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

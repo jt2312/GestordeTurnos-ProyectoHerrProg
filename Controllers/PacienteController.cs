@@ -7,34 +7,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HerramientasProgFinal.Data;
 using HerramientasProgFinal.Models;
+using HerramientasProgFinal.Services;
+using HerramientasProgFinal.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HerramientasProgFinal.Controllers
 {
     public class PacienteController : Controller
     {
-        private readonly CitacionContext _context;
 
-        public PacienteController(CitacionContext context)
+        private readonly IPacienteService _pacienteService;
+
+        public PacienteController(IPacienteService pacienteService)
         {
-            _context = context;
+            _pacienteService = pacienteService;
         }
 
         // GET: Paciente
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? filter)
         {
-            return View(await _context.Paciente.ToListAsync());
+            var pacientes = _pacienteService.GetAll(filter);
+
+            var viewModel = new PacienteViewModel();
+            viewModel.Pacientes = pacientes;
+
+            return View(viewModel);
         }
 
         // GET: Paciente/Details/5
+        [Authorize(Roles = "AdminSupremo,SemiAdmin,Noob")]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _pacienteService.getContext().Paciente == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Paciente
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var paciente = await _pacienteService.GetById(id);
             if (paciente == null)
             {
                 return NotFound();
@@ -44,6 +53,7 @@ namespace HerramientasProgFinal.Controllers
         }
 
         // GET: Paciente/Create
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
         public IActionResult Create()
         {
             return View();
@@ -54,26 +64,24 @@ namespace HerramientasProgFinal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Edad")] Paciente paciente)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(paciente);
-                await _context.SaveChangesAsync();
+                _pacienteService.Create(paciente);
                 return RedirectToAction(nameof(Index));
-            }
-            return View(paciente);
+            
         }
 
         // GET: Paciente/Edit/5
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _pacienteService.getContext().Paciente == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Paciente.FindAsync(id);
+            var paciente = await _pacienteService.GetById(id);
             if (paciente == null)
             {
                 return NotFound();
@@ -86,6 +94,7 @@ namespace HerramientasProgFinal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Edad")] Paciente paciente)
         {
             if (id != paciente.Id)
@@ -93,38 +102,20 @@ namespace HerramientasProgFinal.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(paciente);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!PacienteExists(paciente.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(paciente);
+            _pacienteService.Update(paciente,id);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Paciente/Delete/5
+        [Authorize(Roles = "AdminSupremo")]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _pacienteService.getContext().Paciente == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.Paciente
+            var paciente = await _pacienteService.getContext().Paciente
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (paciente == null)
             {
@@ -137,21 +128,26 @@ namespace HerramientasProgFinal.Controllers
         // POST: Paciente/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AdminSupremo")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var paciente = await _context.Paciente.FindAsync(id);
-            if (paciente != null)
+            if (_pacienteService.getContext().Paciente == null)
             {
-                _context.Paciente.Remove(paciente);
+                return Problem("Entity set 'CitacionContext.Paciente'  is null.");
             }
 
-            await _context.SaveChangesAsync();
+            var paciente = await _pacienteService.GetById(id);
+            if (paciente != null)
+            {
+                _pacienteService.Delete(paciente);
+            }
+            
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PacienteExists(int id)
+        private bool PatientExists(int id)
         {
-            return _context.Paciente.Any(e => e.Id == id);
+            return (_pacienteService.getContext().Paciente?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

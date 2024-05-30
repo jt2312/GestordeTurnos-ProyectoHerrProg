@@ -19,21 +19,21 @@ public class RolesController : Controller
         _roleService = service;
     }
 
-    [Authorize]
+    [Authorize(Roles = "AdminSupremo,SemiAdmin")]
     public IActionResult Index()
     {
         var users = _roleService.GetAll();
         return View(users);
     }
 
-    [Authorize(Roles = "AdminSupremo")]
+    [Authorize(Roles = "AdminSupremo,SemiAdmin")]
     public IActionResult Create()
     {
         return View();
     }
 
     [HttpPost]
-    [Authorize(Roles = "AdminSupremo")]
+    [Authorize(Roles = "AdminSupremo,SemiAdmin")]
     public IActionResult Create(string roleName)
     {
         if (!string.IsNullOrEmpty(roleName)) {

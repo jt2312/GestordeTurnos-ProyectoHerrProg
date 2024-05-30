@@ -5,12 +5,12 @@ using HerramientasProgFinal.Models;
 
 namespace HerramientasProgFinal.Services;
 
-public class PatientService : IPacienteService
+public class PacienteService : IPacienteService
 {
 
     private readonly CitacionContext _context;
 
-    public PatientService(CitacionContext context)
+    public PacienteService(CitacionContext context)
     {
         _context = context;
     }

@@ -24,7 +24,7 @@ public class UsersController : Controller
         _roleManager = roleManager;
     }
 
-    [Authorize]
+    [Authorize(Roles = "AdminSupremo,SemiAdmin")]
     public IActionResult Index()
     {
         //listar todos los usuarios
@@ -32,7 +32,7 @@ public class UsersController : Controller
         return View(users);
     }
 
-    [Authorize(Roles = "AdminSupremo")]
+    [Authorize(Roles = "AdminSupremo,SemiAdmin")]
     public async Task<IActionResult> Edit(string id)
     {
         var user = await _userManager.FindByIdAsync(id);
@@ -46,7 +46,7 @@ public class UsersController : Controller
     }
 
     [HttpPost]
-    [Authorize(Roles = "AdminSupremo")]
+    [Authorize(Roles = "AdminSupremo,SemiAdmin")]
     public async Task<IActionResult> Edit(UserEditViewModel model)
     {
         var user = await _userManager.FindByNameAsync(model.UserName);

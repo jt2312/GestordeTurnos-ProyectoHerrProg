@@ -262,3 +262,4 @@ F:\Analisis en sistemas\ISTEA\ProyectiFinalH\HerramientasProgFinal\obj\Debug\net
 F:\Analisis en sistemas\ISTEA\ProyectiFinalH\HerramientasProgFinal\obj\Debug\net8.0\HerramientasProgFinal.genruntimeconfig.cache
 F:\Analisis en sistemas\ISTEA\ProyectiFinalH\HerramientasProgFinal\obj\Debug\net8.0\ref\HerramientasProgFinal.dll
 F:\Analisis en sistemas\ISTEA\ProyectiFinalH\HerramientasProgFinal\obj\Debug\net8.0\HerramientasProgFinal.sourcelink.json
+F:\Analisis en sistemas\ISTEA\ProyectiFinalH\HerramientasProgFinal\bin\Debug\net8.0\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll

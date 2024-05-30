@@ -3,6 +3,7 @@ using System;
 using HerramientasProgFinal.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HerramientasProgFinal.Migrations
 {
     [DbContext(typeof(CitacionContext))]
-    partial class CitacionContextModelSnapshot : ModelSnapshot
+    [Migration("20240527223952_Migrationtercera")]
+    partial class Migrationtercera
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.5");

@@ -7,43 +7,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HerramientasProgFinal.Data;
 using HerramientasProgFinal.Models;
+using HerramientasProgFinal.Services;
+using HerramientasProgFinal.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HerramientasProgFinal.Controllers
 {
     public class ConsultorioController : Controller
     {
-        private readonly CitacionContext _context;
+        private IConsultorioService _consultorioService;
 
-        public ConsultorioController(CitacionContext context)
+        public ConsultorioController(IConsultorioService consultorioService)
         {
-            _context = context;
+            _consultorioService = consultorioService;
         }
 
         // GET: Consultorio
-        public async Task<IActionResult> Index()
+
+        public async Task<IActionResult> Index(string? filter)
         {
-            return View(await _context.Consultorio.ToListAsync());
+            var queryready = _consultorioService.GetAll(filter);
+            
+            var viewModel = new ConsultorioViewModel();
+            viewModel.Consultorios = queryready;
+
+            return View(viewModel);
         }
 
         // GET: Consultorio/Details/5
+        [Authorize(Roles = "AdminSupremo,SemiAdmin,Noob")]  
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var consultorio = await _context.Consultorio
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (consultorio == null)
-            {
-                return NotFound();
-            }
-
-            return View(consultorio);
+            var consultorio = _consultorioService.GetById(id);
+            return View(await consultorio);
         }
 
         // GET: Consultorio/Create
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
         public IActionResult Create()
         {
             return View();
@@ -54,30 +54,22 @@ namespace HerramientasProgFinal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
         public async Task<IActionResult> Create([Bind("Id,Nombre,Direccion")] Consultorio consultorio)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(consultorio);
-                await _context.SaveChangesAsync();
+                _consultorioService.Create(consultorio);
                 return RedirectToAction(nameof(Index));
             }
             return View(consultorio);
         }
 
         // GET: Consultorio/Edit/5
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var consultorio = await _context.Consultorio.FindAsync(id);
-            if (consultorio == null)
-            {
-                return NotFound();
-            }
+            var consultorio = await _consultorioService.GetById(id); 
             return View(consultorio);
         }
 
@@ -86,6 +78,7 @@ namespace HerramientasProgFinal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Direccion")] Consultorio consultorio)
         {
             if (id != consultorio.Id)
@@ -95,37 +88,19 @@ namespace HerramientasProgFinal.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(consultorio);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ConsultorioExists(consultorio.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _consultorioService.Update(consultorio,id);
                 return RedirectToAction(nameof(Index));
-            }
+            }   
+            
             return View(consultorio);
         }
 
         // GET: Consultorio/Delete/5
+        [Authorize(Roles = "AdminSupremo")]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var consultorio = await _context.Consultorio
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var consultorio = await _consultorioService.GetById(id);
             if (consultorio == null)
             {
                 return NotFound();
@@ -137,21 +112,21 @@ namespace HerramientasProgFinal.Controllers
         // POST: Consultorio/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AdminSupremo")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var consultorio = await _context.Consultorio.FindAsync(id);
+            var consultorio = await _consultorioService.GetById(id);
             if (consultorio != null)
             {
-                _context.Consultorio.Remove(consultorio);
+                _consultorioService.Delete(consultorio);
             }
-
-            await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ConsultorioExists(int id)
-        {
-            return _context.Consultorio.Any(e => e.Id == id);
-        }
+        // private bool ConsultorioExists(int id)
+        // {
+        //     return _context.Consultorio.Any(e => e.Id == id);
+        // }
     }
 }

@@ -1,41 +1,61 @@
-@model IEnumerable<HerramientasProgFinal.Models.Consultorio>
+@model HerramientasProgFinal.ViewModels.ConsultorioViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
+<br>
+<body>
+    <div class="container text-center">
+        <h2>Consultorios Registrados</h2>
+    </div>
 
-<h1>Index</h1>
+<br>  
+<div class="col-10 col-md-6 col-lg-8 p-3"  > 
+    <form method="get" class="d-flex" asp-action="Index">
+        
+        <label for="checkbox">Buscar por nombre o direccion:</label>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direccion)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        <input asp-for="filter" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+        <button class="btn btn-outline-info" type="submit">Buscar</button>
+        </form> 
+</div>
+<br>
+    <p>
+        <a asp-action="Create" class="btn btn-info btn-sm text-light">Agrega un Consultorio</a>
+    </p>
+<br>
+    <table class="table table-hover table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                    Direccion
+                </th>
+                <th>
+                    
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Consultorios) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Direccion)
+                    </td>
+
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm text-light">Detalles</a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas borrar este doctor?')">Borrar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

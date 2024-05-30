@@ -16,11 +16,11 @@ builder.Services.AddDefaultIdentity<IdentityUser>()
 
 builder.Services.AddControllersWithViews();
 
-// builder.Services.AddScoped<IConsultorioService, ConsultorioService>();
-// builder.Services.AddScoped<IRolesService, RolesService>();
-// builder.Services.AddScoped<ICitacionService, CitacionService>();
-// builder.Services.AddScoped<IDoctorService, DoctorService>();
-// builder.Services.AddScoped<IPacienteService, PacienteService>();
+builder.Services.AddScoped<IConsultorioService, ConsultorioService>();
+builder.Services.AddScoped<IRolesService, RolesService>();
+builder.Services.AddScoped<ICitacionService, CitacionService>();
+builder.Services.AddScoped<IDoctorService, DoctorService>();
+builder.Services.AddScoped<IPacienteService, PacienteService>();
 
 
 var app = builder.Build();
@@ -44,5 +44,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapRazorPages();
 
 app.Run();

@@ -7,45 +7,48 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HerramientasProgFinal.Data;
 using HerramientasProgFinal.Models;
+using HerramientasProgFinal.Services;
+using HerramientasProgFinal.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace HerramientasProgFinal.Controllers
 {
     public class DoctorController : Controller
     {
-        private readonly CitacionContext _context;
+        private IDoctorService _doctorService;
 
-        public DoctorController(CitacionContext context)
+        public DoctorController(IDoctorService doctorService)
         {
-            _context = context;
+            _doctorService = doctorService;
         }
 
         // GET: Doctor
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? filter)
         {
-            return View(await _context.Doctor.ToListAsync());
+
+            var doctores = _doctorService.GetAll(filter);
+
+            var viewModel = new DoctorViewModel();
+            viewModel.Doctores = doctores;
+
+            return View(viewModel);
         }
 
         // GET: Doctor/Details/5
+        [Authorize(Roles = "AdminSupremo,SemiAdmin,Noob")]
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var doctor = await _context.Doctor
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (doctor == null)
-            {
-                return NotFound();
-            }
-
+            var doctor = await _doctorService.GetById(id);
             return View(doctor);
         }
 
+
         // GET: Doctor/Create
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
         public IActionResult Create()
         {
+            ViewData["ConsultorioId"] = new SelectList(_doctorService.getContext().Consultorio, "Id", "Nombre");
             return View();
         }
 
@@ -54,30 +57,28 @@ namespace HerramientasProgFinal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Edad,Especialidad")] Doctor doctor)
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Edad,,Especialidad,ConsultorioId")] Doctor doctor)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(doctor);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(doctor);
+            _doctorService.Create(doctor);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Doctor/Edit/5
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _doctorService.getContext().Doctor == null)
             {
                 return NotFound();
             }
 
-            var doctor = await _context.Doctor.FindAsync(id);
+            var doctor = await _doctorService.GetById(id);
             if (doctor == null)
             {
                 return NotFound();
             }
+            ViewData["ConsultorioId"] = new SelectList(_doctorService.getContext().Consultorio, "Id", "Nombre", doctor.ConsultorioId);
             return View(doctor);
         }
 
@@ -86,46 +87,23 @@ namespace HerramientasProgFinal.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Edad,Especialidad")] Doctor doctor)
+        [Authorize(Roles = "AdminSupremo,SemiAdmin")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Adad,Especialidad,ConsultorioId")] Doctor doctor)
         {
             if (id != doctor.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(doctor);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DoctorExists(doctor.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(doctor);
+            _doctorService.Update(doctor,id);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Doctor/Delete/5
+        [Authorize(Roles = "AdminSupremo")]
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var doctor = await _context.Doctor
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var doctor = await _doctorService.GetById(id);
             if (doctor == null)
             {
                 return NotFound();
@@ -133,25 +111,24 @@ namespace HerramientasProgFinal.Controllers
 
             return View(doctor);
         }
-
         // POST: Doctor/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "AdminSupremo")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var doctor = await _context.Doctor.FindAsync(id);
+            var doctor = await _doctorService.GetById(id);
             if (doctor != null)
             {
-                _context.Doctor.Remove(doctor);
+                _doctorService.Delete(doctor);
             }
-
-            await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
 
-        private bool DoctorExists(int id)
-        {
-            return _context.Doctor.Any(e => e.Id == id);
-        }
+        // private bool DoctorExists(int id)
+        // {
+        //     return _context.Doctor.Any(e => e.Id == id);
+        // }
     }
 }

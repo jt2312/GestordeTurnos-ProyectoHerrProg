@@ -32,7 +32,7 @@ public class DoctorService : IDoctorService
 
         if (!string.IsNullOrEmpty(filter))
         {
-            query = query.Where(x => x.Name.ToLower().Contains(filter.ToLower()) 
+            query = query.Where(x => x.Nombre.ToLower().Contains(filter.ToLower()) 
             || x.Edad.ToString().ToLower().Contains(filter.ToLower())
             || x.Especialidad.ToLower().Contains(filter.ToLower()));
         }
