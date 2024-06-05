@@ -4,7 +4,53 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Crear paciente</h1>
+
+<body>
+    <br>
+    <h1 class="d-flex justify-content-center">Crear Paciente</h1>
+    <br>
+    <br>
+    <div class="align-content-center">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card-body card bg-light mb-3 ">
+                    <div class="align-content-center">
+                        <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @* <input type="hidden" asp-for="Id" /> *@
+                            <div class="form-group">
+                                <label class="control-label">Nombre</label>
+                                <input asp-for="Nombre" class="form-control" />
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Edad</label>
+                                <input asp-for="Edad" class="form-control" />
+                                <span asp-validation-for="Edad" class="text-danger"></span>
+                            </div>
+                            <br>                               
+                            <div class="form-group align-content-center">
+                                <input type="submit" value="Crear" class="btn btn-info btn-sm text-white" />
+                                <a asp-action="Index" class="btn btn-success btn-sm">Volver</a>                                                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+@* <h1>Crear paciente</h1>
 
 <hr />
 <div class="row">
@@ -36,4 +82,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+} *@

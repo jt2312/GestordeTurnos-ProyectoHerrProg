@@ -80,7 +80,7 @@ namespace HerramientasProgFinal.Controllers
                 return NotFound();
             }
             ViewData["DoctorId"] = new SelectList(_citacionService.getContext().Doctor, "Id", "Nombre");
-            ViewData["PatientId"] = new SelectList(_citacionService.getContext().Paciente, "Id", "Nombre", citacion.PacienteId);
+            ViewData["PacienteId"] = new SelectList(_citacionService.getContext().Paciente, "Id", "Nombre", citacion.PacienteId);
             return View(citacion);
         }
 

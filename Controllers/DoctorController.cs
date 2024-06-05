@@ -88,7 +88,7 @@ namespace HerramientasProgFinal.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "AdminSupremo,SemiAdmin")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Adad,Especialidad,ConsultorioId")] Doctor doctor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Edad,Especialidad,ConsultorioId")] Doctor doctor)
         {
             if (id != doctor.Id)
             {

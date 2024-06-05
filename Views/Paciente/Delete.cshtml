@@ -4,6 +4,46 @@
     ViewData["Title"] = "Delete";
 }
 
+<body>
+    <br>
+    <h2 class="d-flex justify-content-center text-danger">¿Estás seguro de que quieres eliminar este Paciente?</h2>
+    <br>
+    <div class="d-flex justify-content-center text-danger">
+                <form asp-action="Delete" >
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Borrar" class="btn btn-danger" /> 
+                    <a asp-action="Index" class="btn btn-success" >Volver a la Lista</a>
+                </form>
+    </div>
+    <br>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                    <div class="card-body card bg-white mb-3 ">     
+                        <ul class="list-group-item ">
+                            <li class="list-group-item">            
+                                    <dt class="text-danger">Nombre: </dt> <dd class="text-danger">@Html.DisplayFor(model => model.Nombre)</dd>
+                            </li>    
+                            <li class="list-group-item">
+                                <dt class="text-danger">Edad: </dt> <dd class="text-danger">@Html.DisplayFor(model => model.Edad)</dd>
+                            </li>
+                            <br>                                               
+                        </ul>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+
+
+
+
+
+
+@* 
 <h3>seguro que deseas eliminar el paciente?</h3>
 <div>
     
@@ -28,4 +68,4 @@
         <input type="submit" value="Borrar" class="btn btn-danger" /> |
         <a asp-action="Index">Volver a la lista</a>
     </form>
-</div>
+</div> *@

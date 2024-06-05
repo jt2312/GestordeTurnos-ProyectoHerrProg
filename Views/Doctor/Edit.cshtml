@@ -4,7 +4,64 @@
     ViewData["Title"] = "Edit";
 }
 
+
 <body>
+    <br>
+    <h1 class="d-flex justify-content-center">Editar Doctor</h1>
+    <br>
+    <br>
+    <div class="align-content-center">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card-body card bg-light mb-3 ">  
+                    <div class="align-content-center">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                            <div class="form-group">
+                                <label class="control-label">Nombre</label>
+                                <input asp-for="Nombre" class="form-control" />
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Edad</label>
+                                <input asp-for="Edad" class="form-control" />
+                                <span asp-validation-for="Edad" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Especialidad</label>
+                                <input asp-for="Especialidad" class="form-control" />
+                                <span asp-validation-for="Especialidad" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Nombre del Consultorio</label>
+                                <select asp-for="ConsultorioId" class="form-control" asp-items="@ViewBag.ConsultorioId">
+                                    <option value="">Selecciona Hospital</option>
+                                </select>
+                                <span asp-validation-for="ConsultorioId" class="text-danger"></span>
+                            </div>                                                     
+                            <br>
+                            <div class="form-group">
+                                <input type="submit" value="Guardar" class="btn btn-info" />
+                                <a asp-action="Index" class="btn btn-success">Volver a lista</a>                    
+                            </div>
+                        </form>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+        <section>
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    </section>
+</body>
+</html>
+
+
+
+
+
+@* <body>
     <h1>Editar</h1>
 
     <h4>Doctor</h4>
@@ -15,12 +72,12 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
-                    <label asp-for="Nombre" class="control-label"></label>
+                    <label asp-for="Nombre" class="control-label">Nombre</label>
                     <input asp-for="Nombre" class="form-control" />
                     <span asp-validation-for="Nombre" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Edad" class="control-label"></label>
+                    <label asp-for="Edad" class="control-label">Edad</label>
                     <input asp-for="Edad" class="form-control" />
                     <span asp-validation-for="Edad" class="text-danger"></span>
                 </div>
@@ -31,10 +88,10 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Nombre del Consultorio</label>
-                    <select asp-for="Consultorio_" class="form-control" asp-items="@ViewBag.ConsultorioId">
+                    <select asp-for="ConsultorioId" class="form-control" asp-items="@ViewBag.ConsultorioId">
                         <option value="">Selecciona Hospital</option>
                     </select>
-                    <span asp-validation-for="Consultorio_" class="text-danger"></span>
+                    <span asp-validation-for="ConsultorioId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Guardar" class="btn btn-primary" />
@@ -51,3 +108,4 @@
     </section>
 </body>
 </html>
+ *@

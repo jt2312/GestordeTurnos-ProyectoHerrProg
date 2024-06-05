@@ -5,6 +5,55 @@
 }
 
 <body>
+    <br>
+    <h1 class="d-flex justify-content-center">Editar Citacion</h1>
+    <br>
+    <br>
+    <div class="align-content-center">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card-body card bg-light mb-3 ">  
+                    <div class="align-content-center">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" />
+                            <div class="form-group">
+                                <label class="control-label">Descripcion</label>
+                                <input asp-for="Descripcion" class="form-control" />
+                                <span asp-validation-for="Descripcion" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Nombre del doctor</label>
+                                <select asp-for="DoctorId" class="form-control" asp-items="@ViewBag.DoctorId">
+                                    <option value="">Selecciona Doctor</option>
+                                </select>
+                                <span asp-validation-for="DoctorId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Nombre del paciente</label>
+                                <select asp-for="PacienteId" class="form-control" asp-items="@ViewBag.PacienteId">
+                                    <option value="">Selecciona paciente</option>
+                                </select>
+                                <span asp-validation-for="PacienteId" class="text-danger"></span>
+                            </div>                            
+                            <br>    
+                            <div class="form-group">
+                                <input type="submit" value="Guardar" class="btn btn-info" />
+                                <a asp-action="Index" class="btn btn-success">Volver a lista</a>                    
+                            </div>
+                        </form>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+@* <body>
     <h1>Edit</h1>
 
     <h4>Citacion</h4>
@@ -44,3 +93,9 @@
     
 </body>
 </html>
+
+
+
+
+
+ *@

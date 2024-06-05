@@ -4,6 +4,39 @@
     ViewData["Title"] = "Details";
 }
 
+<body>
+    <br>
+    <h1 class="d-flex justify-content-center">Detalles de la Cita</h1>
+    <br>
+    <br>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                    <div class="card-body card bg-light mb-3 ">     
+                        <ul class="list-group-item ">
+                            <li class="list-group-item">            
+                                    <dt>Descripcion: </dt> <dd>@Html.DisplayFor(model => model.Descripcion)</dd>
+                            </li>    
+                            <li class="list-group-item">
+                                <dt>Doctor: </dt> <dd>@Html.DisplayFor(model => model.Doctor.Nombre)</dd>
+                            </li>
+                            <li class="list-group-item">
+                                <dt>Paciente: </dt> <dd>@Html.DisplayFor(model => model.Paciente.Nombre)</dd>
+                            </li>
+                            <br>                                               
+                        </ul>
+                    </div>
+                <div>
+                    <a asp-action="Edit" class="btn btn-info btn-sm text-white" asp-route-id="@Model?.Id">Editar</a>
+                    <a asp-action="Index" class="btn btn-success btn-sm">Volver</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+@* 
 
 <body>
     <h1>Detalles de la cita</h1>
@@ -28,4 +61,4 @@
         <a asp-action="Index" class="btn btn-secondary btn-sm">Volver</a>
     </div>
 </body>
-</html>
+</html> *@

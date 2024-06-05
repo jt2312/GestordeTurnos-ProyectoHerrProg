@@ -4,7 +4,49 @@
     ViewData["Title"] = "Create";
 }
 
+
 <body>
+    <br>
+    <h1 class="d-flex justify-content-center">Crear Citacion </h1>
+    <br>
+    <br>
+    <div class="align-content-center">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <div class="card-body card bg-light mb-3 ">  
+                    <div class="align-content-center">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Descripcion" class="control-label">Descripcion</label>
+                                <input asp-for="Descripcion" class="form-control" />
+                                <span asp-validation-for="Descripcion" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Nombre del doctor</label>
+                                <select asp-for="DoctorId" class="form-control" asp-items="ViewBag.DoctorId"></select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Nombre del paciente</label>
+                                <select asp-for="PacienteId" class="form-control" asp-items="ViewBag.PacienteId"></select>
+                            </div>                     
+                            <div class="form-group">
+                                <input type="submit" value="Crear" class="btn btn-info btn-sm text-white" />
+                                <a asp-action="Index" class="btn btn-success btn-sm">Volver</a>                                                                
+                            </div>                         
+                        </form>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+    <section Scripts>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    </section>
+</body>
+</html>
+
+@* <body>
     <h1>Create</h1>
 
     <h4>Citacion</h4>
@@ -37,4 +79,7 @@
         <a asp-action="Index">Volver</a>
     </div>
 </body>
-</html>
+</html> *@
+
+
+
