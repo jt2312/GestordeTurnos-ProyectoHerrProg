@@ -1,15 +1,17 @@
 <h1 align="center">
-  <p align="center">Julian-Torres-APP</p>
+  <p align="center">TurnosReady!</p>
 </h1>
 
 
 <h2>Descripción del Proyecto</h2>
-<p>El proyecto existente es un sistema de gestión de citas que permite generar citaciones entre el pacientes, doctores y consultorios existentes. Proporciona una plataforma donde el adminitrador puede crear consultorios, agregar y actualizar los doctores que tienen. 
+<p>El proyecto existente es un sistema de gestión de citas que permite generar citaciones entre el pacientes, doctores y consultorios existentes. 
 </p>
 
 ## ✔:Tecnologías utilizadas
-  - Microsoft .NET - MVC
+  - Microsoft .NET
+  - MVC
   - EntityFramework
+  - Razor
   - Bootstrap
 
 ## ✔: Roles existentes
