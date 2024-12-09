@@ -47,3 +47,12 @@ contraseña para todos los users Users123*
     - 2° Ejecutar el comando "dotnet build"
     - 3° ejecutar el comando "dotnet run" para iniciar la aplicacion
 
+## ⚖️ Derechos de Autor y Licencias
+Todos los derechos de autor de este proyecto pertenecen a Julian Nahuel torres. A menos que se especifique lo contrario, todo el contenido de este repositorio está bajo la siguiente licencia:
+<b>Licencia GPL (General Public License):</b> Es una licencia copyleft que establece que cualquier software derivado o enlazado con el proyecto debe ser también distribuido bajo los términos de la GPL. Esta licencia garantiza que cualquier proyecto derivado también sea de código abierto y que las mejoras y modificaciones sean compartidas con la comunidad.
+Si deseas utilizar, modificar o distribuir este proyecto de acuerdo con los términos de la licencia, asegúrate de cumplir con todos los requisitos y atribuciones establecidos.
+Ten en cuenta que cualquier uso no autorizado o violación de los derechos de autor podría estar sujeto a acciones legales correspondientes.
+Si tienes alguna pregunta relacionada con los derechos de autor o la licencia, no dudes en ponerte en contacto conmigo a: <mail>jntorres2012@gmail.com</mail>📧
+
+## 👋
+¡Espero te haya gustado!  Julian.
