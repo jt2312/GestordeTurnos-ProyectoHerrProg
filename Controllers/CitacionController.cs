@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using HerramientasProgFinal.Data;
 using HerramientasProgFinal.Models;
 using HerramientasProgFinal.Services;
@@ -90,7 +86,7 @@ namespace HerramientasProgFinal.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "AdminSupremo,SemiAdmin,Noob")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,DoctorId,PacienteId")] Citacion citacion)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,DoctorId,PacienteId,EstadoActual")] Citacion citacion)
         {
             if (id != citacion.Id)
             {
@@ -101,7 +97,6 @@ namespace HerramientasProgFinal.Controllers
             return RedirectToAction(nameof(Index));
             
         }
-
         // GET: Citacion/Delete/5
         [Authorize(Roles = "AdminSupremo")] 
         public async Task<IActionResult> Delete(int? id)

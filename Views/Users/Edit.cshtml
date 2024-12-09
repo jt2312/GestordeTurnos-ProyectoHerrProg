@@ -23,7 +23,7 @@
             <div class="form-group">
                 <label class="control-label">Rol</label>
                 <select asp-for="Role" asp-items="Model.Roles" class="form-control">
-                    <option>Ninguno</option>
+                    <option></option>
                 </select>
                 <span asp-validation-for="Role" class="text-danger"></span>
             </div>
@@ -35,6 +35,7 @@
     </div>
 </div>
 <br>
+
 <div>
     <a asp-action="Index" class="btn btn-secondary">Volver a la lista</a>
 </div>

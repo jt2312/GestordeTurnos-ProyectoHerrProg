@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {}
+    "F:\\Analisis en sistemas\\ISTEA\\EstudioJulian\\#Cuatrimestres\\3er cuatri\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {}
   },
   "projects": {
-    "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {
+    "F:\\Analisis en sistemas\\ISTEA\\EstudioJulian\\#Cuatrimestres\\3er cuatri\\HerramientasProgFinal\\HerramientasProgFinal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
+        "projectUniqueName": "F:\\Analisis en sistemas\\ISTEA\\EstudioJulian\\#Cuatrimestres\\3er cuatri\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
         "projectName": "HerramientasProgFinal",
-        "projectPath": "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
+        "projectPath": "F:\\Analisis en sistemas\\ISTEA\\EstudioJulian\\#Cuatrimestres\\3er cuatri\\HerramientasProgFinal\\HerramientasProgFinal.csproj",
         "packagesPath": "C:\\Users\\Julian\\.nuget\\packages\\",
-        "outputPath": "F:\\Analisis en sistemas\\ISTEA\\ProyectiFinalH\\HerramientasProgFinal\\obj\\",
+        "outputPath": "F:\\Analisis en sistemas\\ISTEA\\EstudioJulian\\#Cuatrimestres\\3er cuatri\\HerramientasProgFinal\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Julian\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -98,7 +98,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

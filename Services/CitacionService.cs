@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using HerramientasProgFinal.Models;
 using HerramientasProgFinal.Data;
 using Microsoft.EntityFrameworkCore;
+using HerramientasProgFinal.helpers;
 
 namespace HerramientasProgFinal.Services;
 
@@ -57,9 +58,9 @@ public class CitacionService : ICitacionService
     public async Task<Citacion?> GetById(int? id)
     {
         var ConsulTask = await _context.Citacion
-                                    .Include(a => a.Doctor)
-                                    .Include(a => a.Paciente)
-                                    .FirstOrDefaultAsync(m => m.Id == id);
+        .Include(a => a.Doctor)
+        .Include(a => a.Paciente)
+        .FirstOrDefaultAsync(m => m.Id == id);
 
         return ConsulTask;
     }
@@ -68,6 +69,15 @@ public class CitacionService : ICitacionService
     {
         var query = from _Paciente in _context.Paciente select _Paciente;
         return query.ToList();
+    }
+
+    public async Task CambiarEstadoCitaAsync(int citacionId, EstadoCita nuevoEstado)
+    {
+        var cita = await _context.Citacion.FindAsync(citacionId);
+        if (cita == null) throw new Exception("Cita no encontrada");
+
+        cita.EstadoActual = nuevoEstado;
+        await _context.SaveChangesAsync();
     }
 
 
