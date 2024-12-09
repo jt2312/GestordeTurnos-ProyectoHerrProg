@@ -8,11 +8,13 @@
 </p>
 
 ## ✔:Tecnologías utilizadas
-  - Microsoft .NET
+  - Microsoft .NET 8
   - MVC
   - EntityFramework
   - Razor
   - Bootstrap
+  - SqlLite
+  - Identity
 
 ## ✔: Roles existentes
 
